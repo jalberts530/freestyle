@@ -1,5 +1,7 @@
-#import csv
+import csv
 import datetime
+
+csv_file_path = "data/stockprice.csv"
 
 #MENU
 print("---------------------------------------")
@@ -19,3 +21,12 @@ print("All Data Provided by Google Finance")
 print("\n")
 operation = input("Please input an operation from the menu: ")
 print(operation)
+
+
+#Menu If Statements
+if chosen_operation == "Market": operation_market()
+elif chosen_operation == "Price": operation_price()
+elif chosen_operation == "Invest": operation_invest()
+elif chosen_operation == "Portfolio": operation_portfolio()
+#elif chosen_operation == "Destroy": destroy_product()
+else: print("OOPS. PLEASE CHOOSE ONE OF THE RECOGNIZED OPERATIONS.")
