@@ -49,7 +49,17 @@ def operation_price():
 
 
 def operation_invest():
-    print("Investment value")
+    print("Please input the requested variables: ")
+    stock_symbol = input("Stock Symbol:")
+    number_of_shares = input("Number of Shares:")
+    purchase_date = input("Purchase Date:")
+    investment_value = {
+        "Symbol": stock_symbol,
+        "# of Shares": len(number_of_shares),
+        "Purchase Date": purchase_date,
+    }
+    print("Your Gain/(Loss) on ", stock_symbol) #,"is: " investment_value)
+    #products.append(new_product)
 
 def operation_portfolio():
     print("Portfolio Value")
