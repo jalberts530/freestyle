@@ -1,27 +1,21 @@
 #import csv
 import datetime
 
-menu = '''
----------------------------------------
-Welcome to Alberts Financial Management
----------------------------------------
-'''
-
-print("Date: " + datetime.datetime.now().strftime("%Y-%m-%d %H:%m:%S"))
-#Time:
-
-menu_2 = '''
-Operations   Description
-MSummary   | Markey Summary
-SPrice     | Look up a stock price
-IValue     | Determine Investment Value
-PValue     | Determine Current Portfolio Value
-
-
-'''
-
-
-
-print(menu + menu_2)
-stock = input("Input Stock Symbol: ")
-print(stock)
+#MENU
+print("---------------------------------------")
+print("Welcome to Alberts Financial Management")
+print("---------------------------------------")
+print("Date: " + datetime.datetime.now().strftime("%Y-%m-%d"))
+print("Time: " + datetime.datetime.now().strftime("%H:%m:%S"))
+print("\n")
+print("          MENU")
+print("Operations   Description")
+print("Market     | Market Summary")
+print("Price      | Look up a stock price")
+print("Invest     | Determine Investment Value")
+print("Portfolio  | Determine Current Portfolio Value")
+print("---------------------------------------")
+print("All Data Provided by Google Finance")
+print("\n")
+operation = input("Please input an operation from the menu: ")
+print(operation)
