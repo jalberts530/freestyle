@@ -6,9 +6,11 @@ from datetime import date, timedelta
 
 csv_file_path = "data/stockprice.csv"
 
+#Stock List
 my_stocks = []
-us_market_indexes = ["DOW", "S&P", "NASDAQ"]
+us_market_indexes = ["^DJI", "^GSPC", "^IXIC"]
 #test = ['AAPL','T','GOOGL'] Testing IDs
+
 
 #MENU
 print("---------------------------------------")
@@ -18,10 +20,10 @@ print("Date: " + datetime.datetime.now().strftime("%Y-%m-%d") + " " + "Time: " +
 print("\n")
 print("        ~ MENU ~")
 print("Operations   Description")
-print("Market     | US Market Summary")
-print("Price      | Look up a Stock Price")
-print("Invest     | Determine Investment Value")
-print("Portfolio  | Determine Current Portfolio Value")
+print("MARKET     | US Market Summary")
+print("PRICE      | Look up a Stock Price")
+print("INVEST     | Determine Investment Value")
+print("PORTFOLIO  | Determine Current Portfolio Value")
 print("---------------------------------------")
 print("Disclaimer: All Data Provided by Google Finance")
 print("\n")
@@ -31,15 +33,13 @@ print(chosen_operation)
 
 #Operation Definitions
 def operation_market():
-    print("\n" + "~ US Stock Market Summary ~")
-    #print("DOW, NASDAQ, S&P Prices")
-    #symbols = ['AAPL','T','GOOGL'] #figure out what symbol to use for market data
-    data_source = 'google'
+    print("\n" + "~ US Stock Market Summary Past 3 Days ~")
+    data_source = 'yahoo'
     start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
     end = str(date.today()) #> '2017-07-24'
     response = data.DataReader(us_market_indexes, data_source, start, end)
     daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
-    print(daily_closing_prices)
+    print(daily_closing_prices) #figure how to format 2 decimal places
 
 def operation_price():
     print("Lookup stock price")
