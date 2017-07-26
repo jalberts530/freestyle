@@ -8,6 +8,7 @@ csv_file_path = "data/stockprice.csv"
 
 #Stock List
 my_stocks = []
+stock_symbol = []
 us_market_indexes = ["^DJI", "^GSPC", "^IXIC"]
 #test = ['AAPL','T','GOOGL'] Testing IDs
 
@@ -25,7 +26,7 @@ print("PRICE      | Look up a Stock Price")
 print("INVEST     | Determine Investment Value")
 print("PORTFOLIO  | Determine Current Portfolio Value")
 print("---------------------------------------")
-print("Disclaimer: All Data Provided by Google Finance")
+print("Disclaimer: All Data Provided by Yahoo & Google Finance")
 print("\n")
 chosen_operation = input("Please input an operation from the menu: ")
 chosen_operation = chosen_operation.title()
@@ -50,15 +51,26 @@ def operation_price():
 
 def operation_invest():
     print("Please input the requested variables: ")
-    stock_symbol = input("Stock Symbol:")
+    my_stock_symbol = input("Stock Symbol:")
+    #stock_symbol = stock_symbol.title
     number_of_shares = input("Number of Shares:")
     purchase_date = input("Purchase Date:")
     investment_value = {
-        "Symbol": stock_symbol,
+        "Symbol": my_stock_symbol,
         "# of Shares": len(number_of_shares),
         "Purchase Date": purchase_date,
     }
+
+    stock_symbol.append(my_stock_symbol)
+
+    data_source = 'google'
+    start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
+    end = str(date.today()) #> '2017-07-24'
+    response = data.DataReader(stock_symbol, data_source, end)
+    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+
     print("Your Gain/(Loss) on ", stock_symbol) #,"is: " investment_value)
+    print(daily_closing_prices)
     #products.append(new_product)
 
 def operation_portfolio():
