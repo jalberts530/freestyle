@@ -12,7 +12,6 @@ stock_symbol = []
 us_market_indexes = ["^DJI", "^GSPC", "^IXIC"]
 #test = ['AAPL','T','GOOGL'] Testing IDs
 
-
 #MENU
 print("---------------------------------------")
 print("Welcome to Alberts Financial Management")
@@ -34,7 +33,8 @@ print(chosen_operation)
 
 #Operation Definitions
 def operation_market():
-    print("\n" + "~ US Stock Market Summary Past 3 Days ~")
+    print("\n" + "~ US Stock Market Index Summary Past 3 Days ~")
+    #Data Source from Panda Reader
     data_source = 'yahoo'
     start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
     end = str(date.today()) #> '2017-07-24'
@@ -44,9 +44,24 @@ def operation_market():
 
 def operation_price():
     print("Lookup stock price")
-    #quote = web.get_quote_google([])
-    #stocklookup = input("Input Stock Symbol: ")
-    #print(stocklookup)
+    while True:
+        stock_lookup = input("Please input a valid Stock Symbol or DONE to exit: ")
+        if stock_lookup == "DONE":
+            print("Thanks All Done Here!")
+            break
+        else:
+            stock_symbol.append(stock_lookup)
+
+    #Data Source from Panda Reader
+    data_source = 'google'
+    start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
+    end = str(date.today()) #> '2017-07-24'
+    response = data.DataReader(stock_symbol, data_source, end)
+    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+
+    print(daily_closing_prices)
+
+
 
 
 def operation_invest():
@@ -63,6 +78,7 @@ def operation_invest():
 
     stock_symbol.append(my_stock_symbol)
 
+    #Data Source from Panda Reader
     data_source = 'google'
     start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
     end = str(date.today()) #> '2017-07-24'
