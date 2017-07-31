@@ -1,8 +1,7 @@
 import csv
-import datetime # necessary?
-import pandas_datareader.data as web # necessary?
 from pandas_datareader import data
 from datetime import date, timedelta
+import datetime
 
 csv_file_path = "data/stockprice.csv"
 
@@ -10,10 +9,11 @@ csv_file_path = "data/stockprice.csv"
 my_stocks = []
 stock_symbol = []
 us_market_indexes = ["^DJI", "^GSPC", "^IXIC"]
-
+#
 #MENU
+#
 print("---------------------------------------")
-print("Welcome to Alberts Financial Management")
+print("Welcome to Alberts Equity Research")
 print("---------------------------------------")
 print("Date: " + datetime.datetime.now().strftime("%Y-%m-%d") + " " + "Time: " + datetime.datetime.now().strftime("%H:%m:%S"))
 print("\n")
@@ -23,6 +23,7 @@ print("MARKET     | US Market Summary")
 print("PRICE      | Look up a Stock Price")
 print("INVEST     | Determine Investment Value")
 print("PORTFOLIO  | Determine Current Portfolio Value")
+print("EXIT       | Leave the program")
 print("---------------------------------------")
 print("Disclaimer: All Data Provided by Yahoo & Google Finance")
 print("\n")
@@ -37,16 +38,17 @@ while True:
     else:
         break
 print(chosen_operation)
-
+#
+#
 #Operation Definitions
 def operation_exit(): # Exit Program
-    print("Goodbye! Come back soon!")
+    print("Goodbye! Thanks for using Alberts Equity Researh. Come back soon!")
 
 def operation_market():
     print("\n" + "~US Stock Market Index Summary Past 3 Days~")
     #Data Source from Panda Reader
     data_source = 'yahoo'
-    start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
+    start = str(date.today() - timedelta(days=2)) #> '2017-07-09'
     end = str(date.today()) #> '2017-07-24'
     response = data.DataReader(us_market_indexes, data_source, start, end)
     daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
@@ -63,38 +65,46 @@ def operation_price(): #Show Stock Price for Past 5 Days
             stock_symbol.append(stock_lookup)
     #Data Source from Panda Reader
     data_source = 'google'
-    start = str(date.today() - timedelta(days=6)) #> '2017-07-09'
+    start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
     end = str(date.today()) #> '2017-07-24'
     response = data.DataReader(stock_symbol, data_source, start, end)
     daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
-    print("~Closing Prices Past 5 Days~")
+    print("~Closing Prices Past 3 Days~")
     print(daily_closing_prices)
-
 
 def operation_invest():
     print("Please input the requested variables: ")
     my_stock_symbol = input("Stock Symbol:")
-    #stock_symbol = stock_symbol.title
     number_of_shares = input("Number of Shares:")
     purchase_date = input("Purchase Date:")
-    investment_value = {
+    current_price = input("Current Price:") #get panda to calc and remove this field
+    purchase_price = input("Purchase Price:") # get panda to cac and remove this field
+    investment_detail = {
         "Symbol": my_stock_symbol,
         "# of Shares": len(number_of_shares),
         "Purchase Date": purchase_date,
-    }
+        "Current Price": current_price,
+        "Purchase Price:": purchase_price
 
+    }
     stock_symbol.append(my_stock_symbol)
 
-    #Data Source from Panda Reader
-    data_source = 'google'
-    start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
-    end = str(date.today()) #> '2017-07-24'
-    response = data.DataReader(stock_symbol, data_source, end)
-    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+    current_price = int(current_price)
+    purchase_price = int(purchase_price)
+    number_of_shares = int(number_of_shares)
 
-    print("Your Gain/(Loss) on ", stock_symbol) #,"is: " investment_value)
-    print(daily_closing_prices)
-    #products.append(new_product)
+    investment_value = (current_price-purchase_price)*number_of_shares
+
+    print("Your Investment Details: ", "\n", "+", investment_detail)
+    print("\n")
+    print("Your current investment value on", my_stock_symbol, "is: $", investment_value)
+
+    #Data Source from Panda Reader
+    #data_source = 'google'
+    #start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
+    #end = str(date.today()) #> '2017-07-24'
+    #response = data.DataReader(stock_symbol, data_source,start, end)
+    #daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
 
 def operation_portfolio():
     print("Portfolio Value")
