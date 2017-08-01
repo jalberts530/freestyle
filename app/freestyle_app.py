@@ -8,6 +8,8 @@ from dateutil.parser import parse
 csv_file_path = "data/stock_prices.csv"
 
 #Stock List
+portfolio = []
+portfolio_shares = []
 my_stocks = []
 stock_shares = []
 stock_symbol = []
@@ -24,7 +26,7 @@ print("\n")
 print("         ~MENU~")
 print("Operations   Description")
 print("MARKET     | US Market Summary")
-print("PRICE      | Look up a Stock Price")
+print("PRICE      | Look up Stock Price(s) & Write to CSV")
 print("INVEST     | Determine Investment Value")
 print("PORTFOLIO  | Determine Current Portfolio Value")
 print("EXIT       | Leave the program")
@@ -56,6 +58,7 @@ def operation_market():
     end = str(date.today()) #> '2017-07-24'
     response = data.DataReader(us_market_indexes, data_source, start, end)
     daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+    daily_closing_prices = daily_closing_prices.round(2)
     print(daily_closing_prices) #figure how to format 2 decimal places
 
 def operation_price(): #Show Stock Price for Past 3 Days
@@ -63,7 +66,7 @@ def operation_price(): #Show Stock Price for Past 3 Days
     while True:
         stock_lookup = input("Please input a valid Stock Symbol or DONE to exit: ")
         if stock_lookup == "DONE":
-            print("Thanks All Done Here!")
+            print("Thanks All Done Here, See Data Below: ")
             break
         else:
             stock_symbol.append(stock_lookup)
@@ -84,8 +87,7 @@ def operation_price(): #Show Stock Price for Past 3 Days
     else:
         print("\nOK. The data is not saved\n")
 
-
-def operation_invest():
+def operation_invest(): #Michael Quarato Assisted with this part of the project
     symbol =input("Please select a stock by symbol: ")
     symbol = symbol.upper()
     stock_symbols.append(symbol)
@@ -117,11 +119,38 @@ def operation_invest():
         else:
             print("\nYour loss is: " + str('${0:.2f}'.format(abs(perform))))
 
-def operation_portfolio(): #Write Stocks in Portfolio to a csv
-    print("Lookup stock price")
+def operation_portfolio(): #Current Value of Portfolio (May Abadon)
+    print("Calculate Current Portfolio Value up to 5 Stocks")
 
+    while True:
+        portfolio_stock = input("Input a stock symbol from your portfolio: ")
+        if portfolio_stock == "DONE":
+            print("Thanks All Done Here!: ")
+            break
+        else:
+            portfolio.append(portfolio_stock)
+            print(portfolio)
+    while True:
+        portfolio_share_input = input("Input the number of shares to each correspond stock: ")
+        if portfolio_share_input == "DONE":
+            print("Thanks All Done Here!: ")
+            break
+        else:
+            portfolio_shares.append(portfolio_share_input)
+            print(portfolio_shares)
 
+    #Data Source from Panda Reader
+    data_source = 'google'
+    start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
+    end = str(date.today()) #> '2017-07-24'
+    response = data.DataReader(portfolio, data_source, start, end)
+    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+    print(daily_closing_prices) #figure how to format 2 decimal places
 
+    daily_closing_prices = daily_closing_prices.values
+
+    total_portfolio_value = daily_closing_prices*portfolio_shares
+    print(total_portfolio_value)
 
 
 
@@ -135,3 +164,6 @@ elif chosen_operation == "Portfolio": operation_portfolio()
 elif chosen_operation == "Exit": operation_exit()
 #elif chosen_operation == "Destroy": destroy_product()
 else: print("OOPS. PLEASE CHOOSE ONE OF THE RECOGNIZED OPERATIONS.")
+
+
+#Ask Michael About ERROR VALIDATION on Dates
