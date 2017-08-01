@@ -9,6 +9,7 @@ csv_file_path = "data/stockprice.csv"
 
 #Stock List
 my_stocks = []
+stock_shares = []
 stock_symbol = []
 stock_symbols = []
 us_market_indexes = ["^DJI", "^GSPC", "^IXIC"]
@@ -75,6 +76,15 @@ def operation_price(): #Show Stock Price for Past 3 Days
     print("~Closing Prices Past 3 Days~")
     print(daily_closing_prices)
 
+    confirmation = input("\nWould you like to save this data to a file? (Y/N) ")
+        confirmation = confirmation.upper()
+        if confirmation == "Y":
+            prices = daily_closing_prices.to_csv(csv_file_path)
+            print("\nGreat! The data has been saved to data/stock_prices.csv\n")
+        else:
+            print("\nOK. The data is not saved\n")
+
+
 def operation_invest():
     symbol =input("Please select a stock by symbol: ")
     symbol = symbol.upper()
@@ -107,8 +117,32 @@ def operation_invest():
         else:
             print("\nYour loss is: " + str('${0:.2f}'.format(abs(perform))))
 
-def operation_portfolio(): #write stock in Portfolio to CSV
-    print("Input Stock Symbol and # of Shares to Determine Current Portfolio Value")
+def operation_portfolio(): #Write Stocks in Portfolio to a csv
+    print("Lookup stock price")
+    while True:
+        stock_lookup = input("Please input a valid Stock Symbol or DONE to exit: ")
+        if stock_lookup == "DONE":
+            print("Thanks All Done Here!")
+            break
+        else:
+            stock_symbol.append(stock_lookup)
+    #Data Source from Panda Reader
+    data_source = 'google'
+    start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
+    end = str(date.today()) #> '2017-07-24'
+    response = data.DataReader(stock_symbol, data_source, start, end)
+    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+    print("~Closing Prices Past 3 Days~")
+    print(daily_closing_prices)
+
+    #Write to csv
+    daily_closing_prices.to_csv(csv_file_path)
+
+
+
+
+
+
 
 #Menu If Statements
 if chosen_operation == "Market": operation_market()
