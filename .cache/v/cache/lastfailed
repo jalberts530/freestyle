@@ -1,5 +1,0 @@
-{
-  "app/test_date_lookup.py": true,
-  "test/test_add_stocks.py": true,
-  "test/test_invest_value.py": true
-}
