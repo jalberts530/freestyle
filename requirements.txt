@@ -2,3 +2,4 @@ pandas
 pandas-datareader
 python-dateutil
 pytest
+git+https://github.com/jalberts530/freestyle.git
