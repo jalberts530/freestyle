@@ -15,9 +15,13 @@ Download the source code:
 ```shell
 git clone https://github.com/jalberts530/freestyle.git
 cd desktop/freestyle/app/freestyle_app.py
-
-Please review requirements.txt file to see what python packages are required to run the program
 ```
+**Required Python Packages**
+Please review requirements.txt file to see what python packages are required to run the program
+
+**Python Version**
+Please use Python 3 to run the application
+
 ## Usage
 
 ```shell
