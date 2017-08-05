@@ -1,12 +1,12 @@
-Free Style Project Planning Document
+**Free Style Project Planning Document**
 
-Application Objective:
+**Application Objective:**
 The objective of this application is to provide the user with information on the US Stock market.  The specific functionality of the application is described below.
 
-Functionality:
+**Functionality:**
 The application has the ability to run 4 unique operations.  The operations are called "MARKET", "PRICE", "INVEST" and "EXIT"
 
-Operation Descriptions
+**Operation Descriptions**
 1) The "MARKET" operation allows the user to get data on the closing positions of the Dow Jones (^DJI), S&P 500 (^GSPC) and NASDAQ (^IXIC) Market Indices
 
 2) The "PRICE" operation allows the user to get data on the closing price of a set of stock of the users choosing.
@@ -20,15 +20,18 @@ Operation Descriptions
 
 4) The "EXIT" operation allows the user to close out of the application from the menu.
 
-Application INPUTS:
+**Application INPUTS:**
   1) Menu Operations
   2) Stock Stock Symbols
   3) Stock Purchase Date
   4) Stock Sell Date
   5) Number of Shares sold
 
-Application OUTPUTS:
+**Application OUTPUTS:**
   1) US Market Index Data from Panda Reader
   2) Stock Market Price Data from Panda Reader
   3) Ability to write stock market price data to CSV file
-  4) Abilty to calcuate investment value (GAIN/LOSS) of a particular stock based on various inputs 
+  4) Abilty to calcuate investment value (GAIN/LOSS) of a particular stock based on various inputs
+
+**Application Screenshots:**
+Open the Planning Folder to see the application screenshots
