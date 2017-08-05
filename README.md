@@ -1,6 +1,6 @@
 # Freestyle Project: Alberts Equity Research
 
-#About the Application:
+## About the Application:
 The **Alberts Equity Research** application allows the user to conduct their own US stock market research.  The applciation has the functinality to lookup the closing positions of the Dow Jones (^DJI), S&P 500 (^GSPC) and NASDAQ (^IXIC) Stock Market Indices.  The user is also able to get data on the closing price of a one or many stocks of the users choosing.  This data can then be written to a CSV file for further analysis.  The applicaiton also has the functionality to calculate investment gain/loss by prompting the user to enter various inputs.  
 
 The menu of the application will prompt the user to run 4 unique operations.  The operations are called "MARKET", "PRICE", "INVEST" and "EXIT".  These operations correspond to the functionality described above.  The menu of the application also provides a description of each operation.
