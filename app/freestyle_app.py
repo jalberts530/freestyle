@@ -29,7 +29,6 @@ print("Operations   Description")
 print("MARKET     | US Market Summary")
 print("PRICE      | Look up Stock Price(s) & Write to CSV")
 print("INVEST     | Determine Investment Value")
-#print("PORTFOLIO  | Determine Current Portfolio Value")
 print("EXIT       | Leave the program")
 print("---------------------------------------")
 print("Disclaimer: All Data Provided by Yahoo & Google Finance")
@@ -52,15 +51,19 @@ def operation_exit(): # Exit Program
     print("Goodbye! Thanks for using Alberts Equity Research. Come back soon!")
 
 def operation_market():
-    print("\n" + "~US Stock Market Index Summary Past 3 Days~")
-    #Data Source from Panda Reader
-    data_source = 'yahoo'
-    start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
-    end = str(date.today()) #> '2017-07-24'
-    response = data.DataReader(us_market_indexes, data_source, start, end)
-    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
-    daily_closing_prices = daily_closing_prices.round(2)
-    print(daily_closing_prices) #figure how to format 2 decimal places
+    try:
+        print("\n" + "~US Stock Market Index Summary Past 3 Days~")
+        #Data Source from Panda Reader
+        data_source = 'yahoo'
+        start = str(date.today() - timedelta(days=3)) #> '2017-07-09'
+        end = str(date.today()) #> '2017-07-24'
+        response = data.DataReader(us_market_indexes, data_source, start, end)
+        daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
+        daily_closing_prices = daily_closing_prices.round(2)
+        print(daily_closing_prices) #figure how to format 2 decimal places
+    except ValueError:
+       print("Unexpected error has occurred retrieving index data, Please try again")
+       sys.exit()
 
 def operation_price(): #Show Stock Price for Past 3 Days
     print("Lookup stock price")
@@ -123,47 +126,9 @@ def operation_invest(): #Michael Quarato Assisted with this part of the project
         else:
             print("\nYour loss is: " + str('${0:.2f}'.format(abs(perform))))
 
-def operation_portfolio(): #Current Value of Portfolio (May Abadon)
-    print("Calculate Current Portfolio Value up to 5 Stocks")
-
-    while True:
-        portfolio_stock = input("Input a stock symbol from your portfolio or DONE to exit: ")
-        if portfolio_stock == "DONE":
-            print("Thanks All Done Here!: ")
-            break
-        else:
-            portfolio.append(portfolio_stock)
-            print(portfolio)
-    while True:
-        portfolio_share_input = input("Input the number of shares to each correspond stock or DONE to exit: ")
-        if portfolio_share_input == "DONE":
-            print("Thanks All Done Here!: ")
-            break
-        else:
-            portfolio_shares.append(portfolio_share_input)
-            print(portfolio_shares)
-
-    #portfolio_shares = int(portfolio_shares)
-
-    #Data Source from Panda Reader
-    data_source = 'google'
-    start = str(date.today() - timedelta(days=1)) #> '2017-07-09'
-    end = str(date.today()) #> '2017-07-24'
-    response = data.DataReader(portfolio, data_source, start, end)
-    daily_closing_prices = response.ix["Close"] # ix() is a pandas DataFrame function
-    print(daily_closing_prices) #figure how to format 2 decimal places
-
-    daily_closing_prices = daily_closing_prices.values
-
-    #total_portfolio_value = (daily_closing_prices*portfolio_shares)
-
-    total_portfolio_value = daily_closing_prices.mul(portfolio_shares, axis=0)
-    print(total_portfolio_value)
-
 #Menu If Statements
 if chosen_operation == "Market": operation_market()
 elif chosen_operation == "Price": operation_price()
 elif chosen_operation == "Invest": operation_invest()
-#elif chosen_operation == "Portfolio": operation_portfolio()
 elif chosen_operation == "Exit": operation_exit()
 else: print("OOPS. PLEASE CHOOSE ONE OF THE RECOGNIZED OPERATIONS.")
