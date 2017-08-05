@@ -4,7 +4,7 @@ from datetime import datetime
 from datetime import date, timedelta
 import datetime
 from dateutil.parser import parse
-#import numpy as np
+import sys
 
 csv_file_path = "data/stock_prices.csv"
 
@@ -99,7 +99,8 @@ def operation_invest(): #Michael Quarato Assisted with this part of the project
         date_start = datetime.datetime.strptime(date_start, '%Y-%m-%d')
         end_date = datetime.datetime.strptime(end_date, '%Y-%m-%d')
     except ValueError:
-        print("")
+       print("Invalid Date Format Has Been Input, Program has Closed")
+       sys.exit()
     #Panda Data
     number_of_stocks = input("Please input quantity of shares owned: ")
     number_of_stocks = float(number_of_stocks)
