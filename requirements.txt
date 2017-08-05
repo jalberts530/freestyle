@@ -1,0 +1,4 @@
+pandas
+pandas-datareader
+python-dateutil
+pytest
