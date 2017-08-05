@@ -1,4 +1,4 @@
-# Freestyle Project Planning Document
+## Freestyle Project Planning Document
 
 **Application Name:** Alberts Equity Research
 
