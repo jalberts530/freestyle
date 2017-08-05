@@ -15,13 +15,13 @@ The application has the ability to run 4 unique operations.  The operations are 
 1) The **"MARKET"** operation allows the user to get data on the closing positions of the Dow Jones (^DJI), S&P 500 (^GSPC) and NASDAQ (^IXIC) Stock Market Indices
 
 2) The **"PRICE"** operation allows the user to get data on the closing price of a one or many stocks of the users choosing.
-  a) The user can input as many stocks as they choose and the application will output the stock price information.
-  b) The user also has the option to write the stock market data to a CSV file in the "data" folder if they choose.
+  - The user can input as many stocks as they choose and the application will output the stock price information.
+  - The user also has the option to write the stock market data to a CSV file in the "data" folder if they choose.
 
 3) The **"INVEST"** operation allows the user to determine the value of their stock market investment.
-  a) The user is required to input the *stock symbol, purchase data, sell date and number of shares.*
-  b) Once the above inputs have been entered the application will calculate the gain/loss on the investment.
-  c) The user must make sure to enter the dates in the specified format and on days where the stock market was open.
+  - The user is required to input the *stock symbol, purchase data, sell date and number of shares.*
+  - Once the above inputs have been entered the application will calculate the gain/loss on the investment.
+  - The user must make sure to enter the dates in the specified format and on days where the stock market was open.
 
 4) The **"EXIT"** operation allows the user to close out of the application from the menu.
 
